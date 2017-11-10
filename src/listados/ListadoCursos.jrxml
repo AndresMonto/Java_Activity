@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9f17b32-018c-465d-b771-9e1c12852de5">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="time" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="wek" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select c.codCur , nomCur , nomDoc from cursos as c left join docentes as d on d.codDoc = c.codDoc]]>
+	</queryString>
+	<field name="codCur" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomCur" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomDoc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="121" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="325" y="0" width="230" height="20" uuid="dd4d3286-28d2-447e-84e4-48e76546c88c"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="68" y="77" width="405" height="44" backcolor="#BFD5FF" uuid="3e74075a-af7f-4c21-b239-224fd41d88a9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="92" y="77" width="363" height="44" uuid="7e5dc986-f720-4fdf-9fc3-42c0331def79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE CURSOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="488" y="0" width="1" height="20" uuid="069ef135-e903-4e9a-a860-2f37b5aa99b7"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="388" y="0" width="1" height="20" uuid="9ac41bb2-7fa1-40f1-ba75-79b9306fc0a0"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="488" y="0" width="67" height="20" uuid="9d765b0b-dcc6-422b-aa83-0a02b0aec5d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="0" width="101" height="20" uuid="503c13ea-a4ad-409b-9dfe-afc70aa5b917"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="0" width="64" height="20" uuid="7d3c9f1e-6592-4bca-862a-03c624309e30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{wek}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="68" y="0" width="405" height="30" uuid="a05f5cb8-435f-4415-b971-9429d8aa8d3b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="92" y="0" width="100" height="30" uuid="9950a899-897d-4b5d-9f1b-44f059f411f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="0" width="100" height="30" uuid="464d66b1-bf10-47b3-ab3c-03e386dca7e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="207" y="0" width="1" height="30" uuid="dbc2defd-3c38-4a3d-ad53-e0195d03ff29"/>
+			</line>
+			<line>
+				<reportElement x="352" y="1" width="1" height="30" uuid="397eee7a-a614-4bc8-8042-441653092607"/>
+			</line>
+			<staticText>
+				<reportElement x="366" y="0" width="100" height="30" uuid="b857fa86-0be3-477a-bcb2-632d91f59ece"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCENTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="68" y="4" width="405" height="20" backcolor="#EAEDFF" uuid="4443d3fc-e66a-415d-80df-b920254dad1a"/>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#CCCCFF"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="208" y="4" width="1" height="20" uuid="ee294ce2-2011-4fd5-8b85-69073ed8542d"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="352" y="4" width="1" height="20" uuid="45cb3c5b-8d95-41aa-82f7-69e54810047f"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="92" y="4" width="100" height="20" uuid="1797648d-9320-4e4a-8d6d-89c99a125f53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codCur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="4" width="100" height="20" uuid="c3deec79-6b09-4af2-9145-593bbd75f08f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomCur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="4" width="100" height="20" uuid="08656f01-41df-4a32-be26-a7c7b9c18df4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomDoc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

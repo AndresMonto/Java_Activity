@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fed217f8-21d3-40e4-b3f6-a7eb42f83bde">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date" class="java.lang.String">
+		<defaultValueExpression><![CDATA["99 - 99 - 9999"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="time" class="java.lang.String">
+		<defaultValueExpression><![CDATA["99 : 99 : 99"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="wek" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Wednesday"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select d.codDoc , nomDoc , nomCur from docentes as d left join cursos as c on d.codDoc = c.codDoc order by d.codDoc]]>
+	</queryString>
+	<field name="codDoc" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomDoc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomCur" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="317" y="2" width="230" height="20" uuid="51c410a3-7485-4f33-a48e-e19c5b7cf927"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="75" y="61" width="405" height="44" backcolor="#BFD5FF" uuid="0f579c88-8931-4afd-994d-86ea6bad5323"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="99" y="61" width="363" height="44" uuid="6e1399f0-bfc7-4c83-a7e4-2ce47018cfe9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE DOCENTES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="317" y="0" width="63" height="22" uuid="0aaedaee-dd2f-4c47-820e-b22b7440a456"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{wek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="100" height="22" uuid="50290a7a-1df1-4b7e-a914-16ba1b0fa8a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="67" height="22" uuid="7f8e4064-ba8c-4b78-971c-59a8855cce36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{time}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="480" y="0" width="1" height="20" uuid="68a6013e-5cf8-4c2e-bc1a-947dde12e39b"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="380" y="0" width="1" height="20" uuid="d079458a-a132-4f1c-b0d8-48f867db1e74"/>
+				<graphicElement>
+					<pen lineColor="#E8E8F5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement x="75" y="1" width="405" height="30" uuid="156d5620-6cd6-4d39-8b92-09dc12f44739"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="99" y="0" width="100" height="30" uuid="0ebac93d-d4df-4d5a-ab5c-3e5c3e3e5b6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="1" width="100" height="30" uuid="712af721-9620-403a-8646-41d35931e715"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="214" y="0" width="1" height="30" uuid="bb49a4fa-b097-4eb1-b649-41bd511ff664"/>
+			</line>
+			<staticText>
+				<reportElement x="362" y="1" width="100" height="30" uuid="e3d13dc8-eab8-491c-a5f1-17c3fc0705ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURSO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="346" y="1" width="1" height="30" uuid="2898d6a2-2ee7-4454-9bf0-bd713d8fc02a"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="75" y="5" width="405" height="20" backcolor="#EAEDFF" uuid="10fea753-8c45-4644-b76c-1f8f28b60d85"/>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#CCCCFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="99" y="5" width="100" height="20" uuid="ff560924-1e3a-4a04-8501-e0f00fcb1a90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codDoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="5" width="100" height="20" uuid="31d29a06-2ab8-49d9-b978-6cbab1658514"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomCur}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="215" y="5" width="1" height="20" uuid="85ae83eb-eca0-426d-ba68-2ebf18d7b63c"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="230" y="5" width="100" height="20" uuid="271a7d6f-8558-4fed-b7cd-4487bed0f2b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomDoc}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="347" y="5" width="1" height="20" uuid="759ba596-311c-4f1f-a79c-61f9bac0b17f"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
