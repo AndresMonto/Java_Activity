@@ -3,7 +3,6 @@ package Jframes;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.GregorianCalendar;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -304,7 +303,6 @@ public class Cone {
 
     public void hora(JLabel jLabel3, JLabel jLabel4, JLabel jLabel5) {
 
-        String code;
         Timer time = new Timer(1000, new ActionListener() {
 
             @Override
@@ -318,7 +316,7 @@ public class Cone {
                 int min = fecha.getTime().getMinutes();
                 int seg = fecha.getTime().getSeconds();
 
-                String[] wek = {"Domingo", "Lunes", "Martes", "Miércoles", "Viernes", "Sábado"};
+                String[] wek = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
 
                 if (seg < 10 && min < 10) {
                     jLabel5.setText(hour + " : 0" + min + " : 0" + seg);
@@ -332,6 +330,7 @@ public class Cone {
                 } else {
                     jLabel5.setText(hour + " : " + min + " : " + seg);
                 }
+                
                 jLabel3.setText(wek[fecha.getTime().getDay()]);
                 jLabel4.setText(day + " - " + month + " - " + year);
 

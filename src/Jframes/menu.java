@@ -1,11 +1,11 @@
 package Jframes;
 
-import listados.Estudiantes_Curso;
-import listados.ListadoCursos;
-import listados.ListadoDocentes;
-import listados.ListadoEstudiantes;
+import listados.*;
 import java.sql.*;
 import javax.swing.*;
+import listados.Cursos_Estudiante;
+import listados.Notas_Curso;
+import listados.Notas_Estudiante;
 
 public class menu extends javax.swing.JFrame {
 
@@ -193,12 +193,27 @@ public class menu extends javax.swing.JFrame {
         jMenu7.add(jMenuItem6);
 
         jMenuItem8.setText("Cursos x Estudiante");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem8);
 
         jMenuItem12.setText("Notas por Estudiante");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem12);
 
         jMenuItem13.setText("Notas x Curso");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem13);
 
         jMenu4.add(jMenu7);
@@ -405,6 +420,54 @@ public class menu extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Cursos_Estudiante Ingreso = new Cursos_Estudiante();
+
+        boolean mostrar = true;
+        for (int a = 0; a < escritorio.getComponentCount(); a++) {
+            if (Ingreso.getClass().isInstance(escritorio.getComponent(a))) {
+
+                mostrar = false;
+            }
+        }
+        if (mostrar) {
+            escritorio.add(Ingreso);
+            Ingreso.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+         Notas_Estudiante Ingreso = new Notas_Estudiante();
+
+        boolean mostrar = true;
+        for (int a = 0; a < escritorio.getComponentCount(); a++) {
+            if (Ingreso.getClass().isInstance(escritorio.getComponent(a))) {
+
+                mostrar = false;
+            }
+        }
+        if (mostrar) {
+            escritorio.add(Ingreso);
+            Ingreso.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+         Notas_Curso Ingreso = new Notas_Curso();
+
+        boolean mostrar = true;
+        for (int a = 0; a < escritorio.getComponentCount(); a++) {
+            if (Ingreso.getClass().isInstance(escritorio.getComponent(a))) {
+
+                mostrar = false;
+            }
+        }
+        if (mostrar) {
+            escritorio.add(Ingreso);
+            Ingreso.setVisible(true);
+        }  
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
      * @param args the command line arguments

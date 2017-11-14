@@ -98,10 +98,10 @@ public class ListadoCursos extends javax.swing.JInternalFrame  {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -166,7 +166,7 @@ public class ListadoCursos extends javax.swing.JInternalFrame  {
             
             String nombre = cone.space( "_"+jLabel4.getText() +"_"+ jLabel5.getText() );
             
-            JasperReport report = JasperCompileManager.compileReport("src/listados/ListadoCursos.jrxml");
+            JasperReport report = JasperCompileManager.compileReport("src/listados/jasper/ListadoCursos.jrxml");
             JasperPrint print = JasperFillManager.fillReport(report, parametro , conn);
             JasperExportManager.exportReportToPdfFile(print, "Reportes/Generales/Listado de Cursos"+nombre+".pdf");
             

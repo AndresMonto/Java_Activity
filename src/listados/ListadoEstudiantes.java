@@ -12,7 +12,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperCompileManager;
 
-public class ListadoEstudiantes extends javax.swing.JInternalFrame  {
+public class ListadoEstudiantes extends javax.swing.JInternalFrame {
 
     Cone cone;
 //    int day, month, year, hour, min, seg;
@@ -24,14 +24,22 @@ public class ListadoEstudiantes extends javax.swing.JInternalFrame  {
 
 //        h1 = new Thread(this);
 //        h1.start();
-
         cone = new Cone();
-        cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+        
+        consulta();
+
         jTable1.setEnabled(false);
         cone.hora(jLabel3, jLabel4, jLabel5);
     }
 
-
+     private void consulta(){
+         
+                 cone.tabla3("select e.codEst , nomEst , count(nomCur) as Cursos "
+                + " from matricula as m  right join estudiantes as e "
+                + " on m.codEst = e.codEst left join cursos as c on c.codCur = m.codCur GROUP BY codEst",
+                "codEst", "nomEst", "cursos", jTable1);
+                 
+     }
     @SuppressWarnings("unchecked")
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,10 +109,10 @@ public class ListadoEstudiantes extends javax.swing.JInternalFrame  {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -160,22 +168,23 @@ public class ListadoEstudiantes extends javax.swing.JInternalFrame  {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registro", "andres", "196994");
-            
+
             Map parametro = new HashMap();
-            
-            parametro.put("wek",  jLabel3.getText());
-            parametro.put("date",  jLabel4.getText());
-            parametro.put("time",  jLabel5.getText());
-            
-            String nombre = cone.space( "_"+jLabel4.getText() +"_"+ jLabel5.getText() );
-            
-            JasperReport report = JasperCompileManager.compileReport("src/listados/ListadoEstudiantes.jrxml");
-            JasperPrint print = JasperFillManager.fillReport(report, parametro , conn);
-            JasperExportManager.exportReportToPdfFile(print, "Reportes/Generales/Listado de Estudiantes"+nombre+".pdf");
-            
+
+            parametro.put("wek", jLabel3.getText());
+            parametro.put("date", jLabel4.getText());
+            parametro.put("time", jLabel5.getText());
+
+            String nombre = cone.space("_" + jLabel4.getText() + "_" + jLabel5.getText());
+
+            JasperReport report = JasperCompileManager.compileReport("src/listados/jasper/ListadoEstudiantes.jrxml");
+            JasperPrint print = JasperFillManager.fillReport(report, parametro, conn);
+            JasperExportManager.exportReportToPdfFile(print, "Reportes/Generales/Listado de Estudiantes" + nombre + ".pdf");
+
             JasperViewer jviewer = new JasperViewer(print, false);
             jviewer.setTitle("Reporte de Prueba");
             jviewer.setVisible(true);
+            consulta();
             
         } catch (Exception ex) {
             System.out.println(ex);

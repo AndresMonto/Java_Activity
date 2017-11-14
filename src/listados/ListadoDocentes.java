@@ -11,67 +11,24 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class ListadoDocentes extends javax.swing.JInternalFrame implements Runnable {
+public class ListadoDocentes extends javax.swing.JInternalFrame {
 
     Cone cone;
     int day, month, year, hour, min, seg;
-    GregorianCalendar fecha;
-    Thread h1;
 
     public ListadoDocentes() {
         initComponents();
-
-        h1 = new Thread(this);
-        h1.start();
 
         cone = new Cone();
         cone.tabla3("select d.codDoc , nomDoc , nomCur from docentes as d left join cursos as c "
                 + " on d.codDoc = c.codDoc ", "codDoc", "nomDoc","nomCur", jTable1);
         jTable1.setEnabled(false);
+        
+        cone.hora(jLabel3, jLabel4, jLabel5);
 
     }
 
-    @Override
-    public void run() {
-        Thread ct = Thread.currentThread();
-
-        while (ct == h1) {
-
-            fecha = new GregorianCalendar();
-            day = fecha.getTime().getDate();
-            month = fecha.getTime().getMonth() + 1;
-            year = fecha.getTime().getYear() + 1900;
-
-            hour = fecha.getTime().getHours();
-            min = fecha.getTime().getMinutes();
-            seg = fecha.getTime().getSeconds();
-
-            String[] wek = {"Domingo", "Lunes", "Martes", "Miércoles", "Viernes", "Sábado"};
-
-            if (seg < 10 && min < 10) {
-                jLabel5.setText(hour + " : 0" + min + " : 0" + seg);
-
-            } else if (seg < 10) {
-                jLabel5.setText(hour + " : " + min + " : 0" + seg);
-
-            } else if (min < 10) {
-                jLabel5.setText(hour + " : 0" + min + " : " + seg);
-
-            } else {
-                jLabel5.setText(hour + " : " + min + " : " + seg);
-            }
-
-            jLabel3.setText(wek[fecha.getTime().getDay()]);
-            jLabel4.setText(day + " - " + month + " - " + year);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-            }
-
-        }
-    }
-
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -140,10 +97,10 @@ public class ListadoDocentes extends javax.swing.JInternalFrame implements Runna
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -208,7 +165,7 @@ public class ListadoDocentes extends javax.swing.JInternalFrame implements Runna
             
             String nombre = cone.space( "_"+jLabel4.getText() +"_"+ jLabel5.getText() );
             
-            JasperReport report = JasperCompileManager.compileReport("src/listados/ListadoDocentes.jrxml");
+            JasperReport report = JasperCompileManager.compileReport("src/listados/jasper/ListadoDocentes.jrxml");
             JasperPrint print = JasperFillManager.fillReport(report, parametro , conn);
             JasperExportManager.exportReportToPdfFile(print, "Reportes/Generales/Listado de Docentes"+nombre+".pdf");
             

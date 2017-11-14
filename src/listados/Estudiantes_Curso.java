@@ -25,12 +25,18 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
         cone = new Cone();
         model = new DefaultTableModel();
 
-        cone.tabla("select *from cursos", "codCur", "nomCur", jTable1);
+        consulta();
 
         jTable2.setEnabled(false);
 
         cone.hora(jLabel3, jLabel4, jLabel5);
 
+    }
+
+    private void consulta() {
+        
+        cone.tabla3("select c.codCur , nomCur , nomDoc from cursos as c left join docentes as d "
+                + " on c.codDoc = d.codDoc   ", "codCur", "nomCur", "nomDoc", jTable1); 
     }
 
     @SuppressWarnings("unchecked")
@@ -95,7 +101,7 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,11 +114,11 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -147,25 +153,24 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(161, 161, 161))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel7))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,22 +201,25 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registro", "andres", "196994");
 
             Map parametro = new HashMap();
-            
-            parametro.put("cod_cur", Integer.valueOf(codCur) );
-            parametro.put("wek",  jLabel3.getText());
-            parametro.put("date",  jLabel4.getText());
-            parametro.put("time",  jLabel5.getText());
 
-            String nombre = cone.space( "_"+jLabel4.getText() +"_"+ jLabel5.getText() );
-            
-            JasperReport report = JasperCompileManager.compileReport("src/listados/EstudiantesxCurso.jrxml");
+            String curso = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+
+            parametro.put("wek", jLabel3.getText());
+            parametro.put("date", jLabel4.getText());
+            parametro.put("time", jLabel5.getText());
+            parametro.put("nomCur", curso);
+
+            String nombre = cone.space("_" + jLabel4.getText() + "_" + jLabel5.getText());
+
+            JasperReport report = JasperCompileManager.compileReport("src/listados/jasper/Estudiantes_Curso.jrxml");
             JasperPrint print = JasperFillManager.fillReport(report, parametro, conn);
-            JasperExportManager.exportReportToPdfFile(print, "Reportes/Especificos/Estudiantes por Curso"+nombre+".pdf");
+            JasperExportManager.exportReportToPdfFile(print, "Reportes/Especificos/Estudiantes del Curso " + curso + nombre + ".pdf");
 
             JasperViewer jviewer = new JasperViewer(print, false);
             jviewer.setTitle("Reporte de Prueba");
             jviewer.setVisible(true);
-
+            consulta();
+            
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -221,8 +229,8 @@ public class Estudiantes_Curso extends javax.swing.JInternalFrame {
 
         codCur = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
 
-        cone.tabla("select e.codEst, e.nomEst from matricula as m, estudiantes as e  "
-                + " where m.codEst = e.codEst and  m.codCur = " + codCur, "codEst", "nomEst", jTable2);
+        cone.tabla("select e.codEst , nomEst from matricula as m , estudiantes as e  "
+                + " where m.codEst = e.codEst  and codCur = " + codCur + " order by codEst", "codEst", "nomEst", jTable2);
     }//GEN-LAST:event_jTable1MousePressed
 
 
