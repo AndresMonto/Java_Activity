@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -194,33 +195,44 @@ public class Notas_Estudiante extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registro", "andres", "196994");
 
-            Map parametro = new HashMap();
+        int a = jTable1.getSelectedRow();
+        int b = jTable2.getRowCount();
+ 
+        if (a == -1 || b == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Ambas Tablas deben contener Informacion",
+                    " Error de Seleccion", JOptionPane.WARNING_MESSAGE);
+        } else {
 
-            String Est = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
-            String Cod = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/registro", "andres", "196994");
 
-            parametro.put("codEst", Cod);
-            parametro.put("wek", jLabel3.getText());
-            parametro.put("date", jLabel4.getText());
-            parametro.put("time", jLabel5.getText());
+                Map parametro = new HashMap();
 
-            String nombre = cone.space("_" + jLabel4.getText() + "_" + jLabel5.getText());
+                String Est = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+                String Cod = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
 
-            JasperReport report = JasperCompileManager.compileReport("src/listados/Notas_Estudiante.jrxml");
-            JasperPrint print = JasperFillManager.fillReport(report, parametro, conn);
-            JasperExportManager.exportReportToPdfFile(print, "Reportes/Especificos/Notas del Estudiante " + Est + nombre + ".pdf");
+                parametro.put("codEst", Cod);
+                parametro.put("nomEst", Est);
+                parametro.put("wek", jLabel3.getText());
+                parametro.put("date", jLabel4.getText());
+                parametro.put("time", jLabel5.getText());
 
-            cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+                String nombre = cone.space("_" + jLabel4.getText() + "_" + jLabel5.getText());
 
-            JasperViewer jviewer = new JasperViewer(print, false);
-            jviewer.setTitle("Reporte de Prueba");
-            jviewer.setVisible(true);
+                JasperReport report = JasperCompileManager.compileReport("src/listados/jasper/Notas_Estudiante.jrxml");
+                JasperPrint print = JasperFillManager.fillReport(report, parametro, conn);
+                JasperExportManager.exportReportToPdfFile(print, "Reportes/Especificos/Notas del Estudiante " + Est + nombre + ".pdf");
 
-        } catch (Exception ex) {
-            System.out.println(ex);
+                cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+
+                JasperViewer jviewer = new JasperViewer(print, false);
+                jviewer.setTitle("Reporte de Prueba");
+                jviewer.setVisible(true);
+
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

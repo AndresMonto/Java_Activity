@@ -156,7 +156,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nomCur}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="301" y="4" width="171" height="20" uuid="f32871a4-04e9-4e8c-a0b8-8551000ef8d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nomDoc}]]></textFieldExpression>
