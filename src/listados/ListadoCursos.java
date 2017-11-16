@@ -20,8 +20,8 @@ public class ListadoCursos extends javax.swing.JInternalFrame  {
 
         cone = new Cone();
         
-        cone.tabla3("select c.codCur , nomCur , nomDoc from cursos as c left join docentes as d "
-                + " on c.codCur = d.codCur ", "codCur", "nomCur","nomDoc", jTable1);
+        cone.tabla3("select c.codCur , nomCur , nomDoc from cursos as c "
+                + "left join docentes as d on d.codDoc = c.codDoc ", "codCur", "nomCur","nomDoc", jTable1);
         
        cone.hora(jLabel3, jLabel4, jLabel5);
         

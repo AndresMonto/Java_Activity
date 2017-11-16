@@ -17,10 +17,10 @@ public class Matricula extends javax.swing.JInternalFrame {
     }
 
     private void actualizar() {
-        
+
         cone.tabla("select *from estudiantes  ", "codEst", "nomEst", jTable1);
 
-         cone.tabla("select *from cursos as c, docentes as d where c.codDoc = d.codDoc ", "codCur", "nomCur", jTable2);
+        cone.tabla("select *from cursos as c, docentes as d where c.codDoc = d.codDoc ", "codCur", "nomCur", jTable2);
 
         cone.tabla4("select *from matricula as m , estudiantes as e , cursos as c "
                 + " where m.codEst = e.codEst and m.codCur = c.codCur order by e.codEst", "codEst", "nomEst", "codCur", "nomCur", jTable3);
@@ -63,6 +63,7 @@ public class Matricula extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("MATRICULAS");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -82,7 +83,6 @@ public class Matricula extends javax.swing.JInternalFrame {
         jTable3.setComponentPopupMenu(jPopupMenu1);
         jTable3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable3.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jTable3.setShowHorizontalLines(false);
         jScrollPane2.setViewportView(jTable3);
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 255));
@@ -153,7 +153,7 @@ public class Matricula extends javax.swing.JInternalFrame {
             }
         ));
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
@@ -174,7 +174,7 @@ public class Matricula extends javax.swing.JInternalFrame {
             }
         ));
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTable2.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jTable2);
 
         jButton1.setBackground(new java.awt.Color(51, 153, 255));
@@ -294,28 +294,10 @@ public class Matricula extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/backgroundP4.png"))); // NOI18N
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4))
-                .addGap(0, 0, 0))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/backgroundP4.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 526));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -326,21 +308,20 @@ public class Matricula extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-         int a = jTable1.getSelectedRow();
-         int b = jTable2.getSelectedRow();
+        int a = jTable1.getSelectedRow();
+        int b = jTable2.getSelectedRow();
 
-         if (a == -1 || b == -1) {
+        if (a == -1 || b == -1) {
             JOptionPane.showMessageDialog(rootPane, "Seleccina las dos tablas", "Error de Seleccion", JOptionPane.WARNING_MESSAGE);
-         } else {
+        } else {
 
-            String codEst = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-            String nomEst = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+            ArrayList<String> nomEst = new ArrayList<>();
+            ArrayList<String> codEst = new ArrayList<>();
 
-            ArrayList<String> nomCur = new ArrayList<>();
-            ArrayList<String> codCur = new ArrayList<>();
-            ArrayList<String> opcionales = new ArrayList<>();
+            String codCur = (String) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+            String nomCur = (String) jTable2.getValueAt(jTable2.getSelectedRow(), 1);
 
-            int row[] = jTable2.getSelectedRows();
+            int row[] = jTable1.getSelectedRows();
 
             int con;
 
@@ -348,31 +329,37 @@ public class Matricula extends javax.swing.JInternalFrame {
 
                 try {
 
-                    ResultSet res = cone.query("select * from matricula WHERE codEst = " + codEst + " and codCur = " + (String) jTable2.getValueAt(row[i], 0));
+                    String codE = (String) jTable1.getValueAt(row[i], 0);
+                    String nomE = (String) jTable1.getValueAt(row[i], 1);
+
+                    ResultSet res = cone.query("select * from matricula WHERE codEst = " + codE + " and codCur = " + codCur);
 
                     if (!res.next()) {
 
-                        codCur.add((String) jTable2.getValueAt(row[i], 0));
-                        nomCur.add((String) jTable2.getValueAt(row[i], 1));
+                        codEst.add(codE);
+                        nomEst.add(nomE);
+
                     }
 
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
-
             }
 
-            if (codCur.isEmpty() || nomCur.isEmpty()) {
+            if (codEst.isEmpty() || nomEst.isEmpty()) {
+
                 JOptionPane.showMessageDialog(rootPane, "Matricula ya existe", "Duplicasion", JOptionPane.WARNING_MESSAGE);
-                
             } else {
 
-                con = JOptionPane.showConfirmDialog(rootPane, "Desea matricular al estudiante : " + nomEst + "\n En el(los) Curso(s):\n " + nomCur);
+                con = JOptionPane.showConfirmDialog(rootPane, "Desea matricular al(los) estudiante(s) : " + nomEst + "\n En el Curso:\n " + nomCur);
+
                 if (con == 0) {
 
-                    for (int i = 0; i < codCur.size(); i++) {
-                        cone.update("insert into matricula values (  " + codEst + " ,  " + codCur.get(i) + "  ,  NULL) ");
+                    for (int i = 0; i < codEst.size(); i++) {
+                        cone.update("insert into matricula values (  " + codEst.get(i) + " ,  " + codCur + "  ,  NULL) ");
+
                     }
+
                     jTextField1.setText("");
                     jTextField1.requestFocus();
                     jLabel3.setText("");

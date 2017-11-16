@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fed217f8-21d3-40e4-b3f6-a7eb42f83bde">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="208"/>
+	<property name="ireport.y" value="89"/>
 	<parameter name="date" class="java.lang.String">
 		<defaultValueExpression><![CDATA["99 - 99 - 9999"]]></defaultValueExpression>
 	</parameter>
@@ -83,7 +83,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="32" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[LISTADO DE ESTUDIANTES]]></text>
+				<text><![CDATA[LISTADO DE DOCENTES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="162" width="555" height="20" uuid="10ccbcfd-8cbb-4229-b83c-2822fd72d073"/>
@@ -150,7 +150,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nomDoc}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="340" y="0" width="145" height="20" uuid="32070d14-58b9-4de6-a037-53fe0dd5e1e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nomCur}]]></textFieldExpression>
