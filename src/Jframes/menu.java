@@ -3,9 +3,6 @@ package Jframes;
 import listados.*;
 import java.sql.*;
 import javax.swing.*;
-import listados.Cursos_Estudiante;
-import listados.Notas_Curso;
-import listados.Notas_Estudiante;
 
 public class menu extends javax.swing.JFrame {
 
@@ -18,7 +15,7 @@ public class menu extends javax.swing.JFrame {
         setSize(780, 700);
         try {
 
-            setIconImage(new ImageIcon(getClass().getResource("../imagenes/Imagen1.png")).getImage());
+            setIconImage(new ImageIcon(getClass().getResource(cone.ICONO_MENU)).getImage());
         } catch (Exception ex) {
 
         }
@@ -33,8 +30,11 @@ public class menu extends javax.swing.JFrame {
 //        if(n.equals("3")){
 //            
 //        jMenu1.setVisible(false);
-//        jMenu3.setVisible(false);
 //        jMenu2.setVisible(false);
+//        jMenu3.setVisible(false);
+//        jMenu6.setVisible(false);        
+//        jMenuItem6.setVisible(false);
+//        jMenuItem13.setVisible(false);
 //        }
 
     }
@@ -68,6 +68,9 @@ public class menu extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
 
@@ -83,10 +86,12 @@ public class menu extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
+            .addGap(0, 188, Short.MAX_VALUE)
         );
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Imagen1.png"))); // NOI18N
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SAIE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ingreso.png"))); // NOI18N
         jMenu1.setText("Ingresar");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +99,7 @@ public class menu extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pantalla.png"))); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estudiantes.png"))); // NOI18N
         jMenuItem1.setText("Estudiante");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +108,7 @@ public class menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Imagen7.png"))); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cursos.png"))); // NOI18N
         jMenuItem2.setText("Cursos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +117,7 @@ public class menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Imagen8.png"))); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/docente.png"))); // NOI18N
         jMenuItem3.setText("Docentes");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +222,26 @@ public class menu extends javax.swing.JFrame {
         jMenu7.add(jMenuItem13);
 
         jMenu4.add(jMenu7);
+
+        jMenu8.setText("Passwords");
+
+        jMenuItem15.setText("Docentes");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem15);
+
+        jMenuItem16.setText("Estudiantes");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem16);
+
+        jMenu4.add(jMenu8);
 
         jMenuBar1.add(jMenu4);
 
@@ -438,7 +463,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-         Notas_Estudiante Ingreso = new Notas_Estudiante();
+        Notas_Estudiante Ingreso = new Notas_Estudiante();
 
         boolean mostrar = true;
         for (int a = 0; a < escritorio.getComponentCount(); a++) {
@@ -454,7 +479,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-         Notas_Curso Ingreso = new Notas_Curso();
+        Notas_Curso Ingreso = new Notas_Curso();
 
         boolean mostrar = true;
         for (int a = 0; a < escritorio.getComponentCount(); a++) {
@@ -466,8 +491,40 @@ public class menu extends javax.swing.JFrame {
         if (mostrar) {
             escritorio.add(Ingreso);
             Ingreso.setVisible(true);
-        }  
+        }
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        Passwords_Docentes Ingreso = new Passwords_Docentes();
+
+        boolean mostrar = true;
+        for (int a = 0; a < escritorio.getComponentCount(); a++) {
+            if (Ingreso.getClass().isInstance(escritorio.getComponent(a))) {
+
+                mostrar = false;
+            }
+        }
+        if (mostrar) {
+            escritorio.add(Ingreso);
+            Ingreso.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        Passwords_Estudiantes Ingreso = new Passwords_Estudiantes();
+
+        boolean mostrar = true;
+        for (int a = 0; a < escritorio.getComponentCount(); a++) {
+            if (Ingreso.getClass().isInstance(escritorio.getComponent(a))) {
+
+                mostrar = false;
+            }
+        }
+        if (mostrar) {
+            escritorio.add(Ingreso);
+            Ingreso.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,12 +573,15 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

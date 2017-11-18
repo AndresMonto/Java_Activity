@@ -13,6 +13,8 @@ public class Ingreso extends javax.swing.JInternalFrame {
         cone = new Cone();
 
         actualizar();
+        
+       
 
     }
 
@@ -22,6 +24,7 @@ public class Ingreso extends javax.swing.JInternalFrame {
         jButton2.setVisible(false);
         cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
         jTextField3.setText("");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -251,8 +254,7 @@ public class Ingreso extends javax.swing.JInternalFrame {
 
         } else {
 
-            cone.update("insert into estudiantes values ( " + cod + " ,'" + nom.toUpperCase() + "')");
-            cone.update("insert into usuarios values (  NULL , NULL  , " + cod + " , '" + nom.toUpperCase() + "'  ,  3  )");
+            cone.update("call GET_IN_EST("+cod+" ,  '"+nom.toUpperCase()+"' ,  "+cone.password()+")");
 
             actualizar();
 
