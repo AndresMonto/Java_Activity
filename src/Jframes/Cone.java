@@ -12,6 +12,8 @@ public class Cone {
     Statement st;
     Connection conex;
     DefaultTableModel modelo;
+    public static final String ICONO_LOGIN = "/imagenes/login.png";
+    public static final String ICONO_MENU = "/imagenes/logo.png";
 
     public Cone() {
         try {
@@ -45,6 +47,34 @@ public class Cone {
         }
 
         return res;
+    }
+
+    public Integer password() {
+        int contra = 0;
+        String value = "";
+
+        do {
+            try {
+
+                contra = (int) (Math.random() * (1000 - 1000000) + 1000000);
+
+                ResultSet rs = st.executeQuery("call validate('" + contra + "')");
+
+                if (rs.next()) {
+                    value = rs.getString("value");
+                }
+                
+                if (value.equals("true")) {
+                    return contra;
+                }
+                
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
+        } while (value.equals("true"));
+
+        return null;
     }
 
     public DefaultTableModel tabla(String sql, String cod, String nom, JTable tabla) {
@@ -185,25 +215,23 @@ public class Cone {
 
     public String space(String texto) {
 
-        String Blancos[] = new String[texto.length()] ;
+        String Blancos[] = new String[texto.length()];
         String code = "";
 
         for (int i = 0; i < texto.length(); i++) {
-            
-            if (texto.charAt(i) == ':') {
-                Blancos[i] = ".";                  
-            }else
-                
-            if (texto.charAt(i) != ' ') {
 
-                Blancos[i] = String.valueOf( texto.charAt(i) );
-                
-            }            
-            if( Blancos[i] != null){
+            if (texto.charAt(i) == ':') {
+                Blancos[i] = ".";
+            } else if (texto.charAt(i) != ' ') {
+
+                Blancos[i] = String.valueOf(texto.charAt(i));
+
+            }
+            if (Blancos[i] != null) {
                 code += Blancos[i];
             }
         }
-        
+
         return code;
     }
 
@@ -330,7 +358,7 @@ public class Cone {
                 } else {
                     jLabel5.setText(hour + " : " + min + " : " + seg);
                 }
-                
+
                 jLabel3.setText(wek[fecha.getTime().getDay()]);
                 jLabel4.setText(day + " - " + month + " - " + year);
 

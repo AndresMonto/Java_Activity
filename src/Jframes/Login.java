@@ -1,14 +1,16 @@
 package Jframes;
 
+
+import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 
 public class Login extends javax.swing.JFrame {
 
     Cone cone;
-    
+
     public static String codVal = "3";
-    
+
     public Login() {
         initComponents();
 
@@ -16,13 +18,11 @@ public class Login extends javax.swing.JFrame {
 
         setLocation(500, 100);
 
-        try {
-
-            setIconImage(new ImageIcon(getClass().getResource("../imagenes/Imagen1.png")).getImage());
-        } catch (Exception ex) {
-
-        }
-
+        ImageIcon icono = new ImageIcon(getClass().getResource(cone.ICONO_LOGIN));
+        Image ico = icono.getImage();
+        this.setIconImage(ico);       
+        
+        
         JOptionPane.showMessageDialog(rootPane, "\t BIENVENIDO A SAIE \t", "INICIO", JOptionPane.INFORMATION_MESSAGE);
 
     }

@@ -324,8 +324,8 @@ public class Docentes extends javax.swing.JInternalFrame {
 
                 } else {
 
-                    cone.update("insert into docentes values ( " + cod + " ,'" + nom.toUpperCase() + "',  " + index.get(indice) + " )");
-                    cone.update("update cursos set codDoc=" + cod + " where codCur=" + index.get(indice));
+                    cone.update("call GET_IN_DOC ( " + cod + " ,'" + nom.toUpperCase() + "',   "+cone.password()+" ,   " + index.get(indice) + " )");
+             
 
                     JOptionPane.showMessageDialog(rootPane, "Docente Registrado Exitosamente!", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
