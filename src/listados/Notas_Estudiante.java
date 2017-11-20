@@ -1,5 +1,6 @@
 package listados;
 
+import Jframes.Login;
 import Jframes.Cone;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,12 +20,16 @@ public class Notas_Estudiante extends javax.swing.JInternalFrame {
     Cone cone;
     DefaultTableModel model;
     String codEst;
+    String codVal;
+    String codUsu;
 
     public Notas_Estudiante() {
         initComponents();
 
         cone = new Cone();
         model = new DefaultTableModel();
+        codVal = Login.codVal;
+        codUsu = Login.codUsu;
 
         consulta();
 
@@ -33,8 +38,17 @@ public class Notas_Estudiante extends javax.swing.JInternalFrame {
         cone.hora(jLabel3, jLabel4, jLabel5);
     }
 
-    private void consulta() {
-        cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+     private void consulta() {
+        
+        if (codVal.equals("3")) {
+            cone.tabla("select *from estudiantes where codEst  = " + codUsu, "codEst", "nomEst", jTable1);
+            jTable2.setModel(model);
+
+        } else{
+            cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+            jTable2.setModel(model);
+
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,5 @@
 package Jframes;
 
-
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
@@ -9,7 +8,10 @@ public class Login extends javax.swing.JFrame {
 
     Cone cone;
 
-    public static String codVal = "3";
+    public static String codVal = null;
+    public static String codUsu = null;
+    public static String nomUsu = null;
+    public static String rolUsu = null;
 
     public Login() {
         initComponents();
@@ -20,9 +22,8 @@ public class Login extends javax.swing.JFrame {
 
         ImageIcon icono = new ImageIcon(getClass().getResource(cone.ICONO_LOGIN));
         Image ico = icono.getImage();
-        this.setIconImage(ico);       
-        
-        
+        this.setIconImage(ico);
+
         JOptionPane.showMessageDialog(rootPane, "\t BIENVENIDO A SAIE \t", "INICIO", JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -126,7 +127,7 @@ public class Login extends javax.swing.JFrame {
         } else {
 
             try {
-                ResultSet res = cone.query("select *from usuarios where binary nomUsu = '" + usu + "' and password= " + pass);
+                ResultSet res = cone.query("call LOGIN(" + pass + " , '" + usu + "')");
 
                 if (res.next()) {
 
@@ -136,14 +137,25 @@ public class Login extends javax.swing.JFrame {
 
                         case "1":
                             codVal = "1";
+                            nomUsu = res.getString("nomUsu");
+                            rolUsu = "ADMINISTRADOR";
+
                             break;
 
                         case "2":
                             codVal = "2";
+                            codUsu = res.getString("codDoc");
+                            nomUsu = res.getString("nomUsu");
+                            rolUsu = "DOCENTE";
+
                             break;
 
-                        default:
+                        case "3":
                             codVal = "3";
+                            codUsu = res.getString("codEst");
+                            nomUsu = res.getString("nomUsu");
+                            rolUsu = "ESTUDIANTE";
+
                             break;
 
                     }

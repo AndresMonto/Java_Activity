@@ -23,10 +23,14 @@ public final class Notas extends javax.swing.JInternalFrame {
 
     Cone cone;
     DefaultTableModel model;
+    String codVal;
+    String codDoc;
 
     public Notas() {
         initComponents();
 
+        codVal = Login.codVal;
+        codDoc = Login.codUsu;
         cone = new Cone();
         actualizar();
         jTable3.setEnabled(false);
@@ -35,18 +39,28 @@ public final class Notas extends javax.swing.JInternalFrame {
     }
 
     private void actualizar() {
+        
 
         jTextField1.requestFocus();
 
-        cone.tabla3(" select doc.codDoc, doc.nomDoc, cur.nomCur"
-                + " from docentes as doc inner join cursos as cur "
-                + " on doc.codDoc = cur.codDoc "
-                + " inner join matricula as mat "
-                + " where cur.codCur = mat.codCur "
-                + " group by nomDoc order by doc.codDoc", "codDoc", "nomDoc", "nomCur", jTable1);
+        if (codVal.equals("2")) {
+            
+            cone.tabla3("SELECT d.codDoc , nomDoc , nomCur from docentes as d , cursos as c "
+                    + " WHERE d.codCur = c.codCur and d.codDoc = " + codDoc, "codDoc", "nomDoc", "nomCur", jTable1);
+            
+            cone.tabla4("SELECT e.codEst , e.nomEst , c.nomCur , m.nota FROM matricula as m , estudiantes as e ,"
+                + " cursos as c WHERE m.codEst = e.codEst and m.codCur = c.codCur and c.codDoc = " + codDoc, "codEst", "nomEst", "nomCur", "nota", jTable3);
+
+        } else {
+            
+            
+            cone.tabla3("SELECT d.codDoc , nomDoc , nomCur from docentes as d , cursos as c "
+                    + " WHERE d.codCur = c.codCur ", "codDoc", "nomDoc", "nomCur", jTable1);
 
         cone.tabla4("SELECT e.codEst , e.nomEst , c.nomCur , m.nota FROM matricula as m , estudiantes as e ,"
                 + " cursos as c WHERE m.codEst = e.codEst and m.codCur = c.codCur", "codEst", "nomEst", "nomCur", "nota", jTable3);
+        }
+
 
     }
 

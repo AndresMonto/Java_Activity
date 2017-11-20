@@ -1,6 +1,7 @@
 package listados;
 
 import Jframes.Cone;
+import Jframes.Login;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
@@ -19,12 +20,16 @@ public class Notas_Curso extends javax.swing.JInternalFrame {
     Cone cone;
     DefaultTableModel model;
     String codCur;
+    String codDoc;
+    String codVal;
 
     public Notas_Curso() {
         initComponents();
 
         cone = new Cone();
         model = new DefaultTableModel();
+         codDoc = Login.codUsu;
+         codVal = Login.codVal;
 
         consulta();
 
@@ -35,9 +40,17 @@ public class Notas_Curso extends javax.swing.JInternalFrame {
     }
 
     private void consulta() {
+        
+        if(codVal.equals("2")){
+            
+        cone.tabla3("select c.codCur , nomCur , nomDoc from cursos as c , docentes as d "
+                + " where c.codDoc = d.codDoc and d.codDoc =  " + codDoc , "codCur", "nomCur", "nomDoc", jTable1);
+        }else{            
 
         cone.tabla3("select c.codCur , nomCur , nomDoc from cursos as c left join docentes as d "
                 + " on c.codDoc = d.codDoc   ", "codCur", "nomCur", "nomDoc", jTable1);
+        }
+        jTable2.setModel(model);
     }
 
     @SuppressWarnings("unchecked")
