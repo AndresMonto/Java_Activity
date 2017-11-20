@@ -1,41 +1,57 @@
 package Jframes;
 
 import listados.*;
-import java.sql.*;
 import javax.swing.*;
 
 public class menu extends javax.swing.JFrame {
 
     Cone cone;
+    String c;
+    String cu;
+    String nu;
+    String ru;
 
     public menu() {
         initComponents();
 
+        c = Login.codVal;
+        cu = Login.codUsu;
+        nu = Login.nomUsu;
+        ru = Login.rolUsu;
         setLocation(300, 10);
         setSize(780, 700);
-        try {
 
+        try {
             setIconImage(new ImageIcon(getClass().getResource(cone.ICONO_MENU)).getImage());
         } catch (Exception ex) {
 
         }
-//        String n = Login.codVal;
-//        
-//        if(n.equals("2")){
-//            
-//        jMenu1.setVisible(false);
-//        jMenu2.setVisible(false);
-//        
-//        }
-//        if(n.equals("3")){
-//            
-//        jMenu1.setVisible(false);
-//        jMenu2.setVisible(false);
-//        jMenu3.setVisible(false);
-//        jMenu6.setVisible(false);        
-//        jMenuItem6.setVisible(false);
-//        jMenuItem13.setVisible(false);
-//        }
+        
+        jLabel1.setText(ru + " - " + nu );
+
+        if (c.equals("2")) {
+
+            jMenu1.setVisible(false);
+            jMenu2.setVisible(false);
+            jMenu6.setVisible(false);
+            jMenu8.setVisible(false);
+
+            jMenuItem8.setVisible(false);
+            jMenuItem12.setVisible(false);
+
+        } else if (c.equals("3")) {
+
+            jMenu1.setVisible(false);
+            jMenu2.setVisible(false);
+            jMenu3.setVisible(false);
+            jMenu6.setVisible(false);
+            jMenu8.setVisible(false);
+
+            jMenuItem6.setVisible(false);
+            jMenuItem13.setVisible(false);
+        } else if (!c.equals("1")) {
+            dispose();
+        }
 
     }
 
@@ -49,6 +65,7 @@ public class menu extends javax.swing.JFrame {
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -78,15 +95,26 @@ public class menu extends javax.swing.JFrame {
         setTitle("MENU PRINCIPAL"); // NOI18N
         setAlwaysOnTop(true);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                .addContainerGap())
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SAIE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
@@ -566,6 +594,7 @@ public class menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

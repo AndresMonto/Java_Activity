@@ -1,6 +1,7 @@
 package listados;
 
 import Jframes.Cone;
+import Jframes.Login;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
@@ -17,13 +18,22 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Cursos_Estudiante extends javax.swing.JInternalFrame {
 
     Cone cone;
+    String codVal;
+    String codUsu;
+    String nomUsu;
+
     DefaultTableModel model;
     String codEst;
 
     public Cursos_Estudiante() {
         initComponents();
 
+        codVal = Login.codVal;
+        codUsu = Login.codUsu;
+        nomUsu = Login.nomUsu;
+
         cone = new Cone();
+
         model = new DefaultTableModel();
 
         consulta();
@@ -34,8 +44,16 @@ public class Cursos_Estudiante extends javax.swing.JInternalFrame {
     }
 
     private void consulta() {
-        cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
-        jTable2.setModel(model);
+        
+        if (codVal.equals("3")) {
+            cone.tabla("select *from estudiantes where codEst  = " + codUsu, "codEst", "nomEst", jTable1);
+            jTable2.setModel(model);
+
+        } else{
+            cone.tabla("select *from estudiantes", "codEst", "nomEst", jTable1);
+            jTable2.setModel(model);
+
+        }
     }
 
     @SuppressWarnings("unchecked")
