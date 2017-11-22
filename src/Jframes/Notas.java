@@ -42,7 +42,6 @@ public final class Notas extends javax.swing.JInternalFrame {
         
 
         jTextField1.requestFocus();
-
         if (codVal.equals("2")) {
             
             cone.tabla3("SELECT d.codDoc , nomDoc , nomCur from docentes as d , cursos as c "

@@ -26,7 +26,7 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`andres`@`localhost` PROCEDURE `GET_IN_DOC` (IN `cod` VARCHAR(40), IN `nom` VARCHAR(40), IN `password` VARCHAR(50), IN `cur` VARCHAR(40))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_IN_DOC` (IN `cod` VARCHAR(40), IN `nom` VARCHAR(40), IN `password` VARCHAR(50), IN `cur` VARCHAR(40))  BEGIN
 
     INSERT INTO docentes VALUES(cod , nom , cur);
     UPDATE cursos SET codDoc= cod WHERE codCur = cur ;
@@ -34,20 +34,20 @@ CREATE DEFINER=`andres`@`localhost` PROCEDURE `GET_IN_DOC` (IN `cod` VARCHAR(40)
 
 END$$
 
-CREATE DEFINER=`andres`@`localhost` PROCEDURE `GET_IN_EST` (`cod` VARCHAR(40), `nom` VARCHAR(40), `password` VARCHAR(50))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_IN_EST` (`cod` VARCHAR(40), `nom` VARCHAR(40), `password` VARCHAR(50))  BEGIN
 
 	INSERT INTO estudiantes VALUES(cod , nom);
 	INSERT INTO usuarios VALUES ( null , cod , nom , 3 , AES_ENCRYPT(password, 1999 ) )  ;
 
 END$$
 
-CREATE DEFINER=`andres`@`localhost` PROCEDURE `LOGIN` (IN `con` VARCHAR(50), IN `nom` VARCHAR(40))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `con` VARCHAR(50), IN `nom` VARCHAR(40))  BEGIN
 
 	SELECT * FROM usuarios WHERE ( AES_DECRYPT(password, 1999 ) ) = con and BINARY nomUsu = nom;
 
 END$$
 
-CREATE DEFINER=`andres`@`localhost` PROCEDURE `validate` (IN `pass` VARCHAR(50))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validate` (IN `pass` VARCHAR(50))  BEGIN
 
 IF ( SELECT COUNT(*) FROM `usuarios` WHERE (AES_DECRYPT(password , 1999)) = pass ) <> 0  THEN
 SELECT "false" as value;
@@ -237,7 +237,7 @@ INSERT INTO `usuarios` (`codDoc`, `codEst`, `nomUsu`, `codRol`, `password`) VALU
 --
 DROP TABLE IF EXISTS `docentes_pass`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`andres`@`localhost` SQL SECURITY DEFINER VIEW `docentes_pass`  AS  select `usuarios`.`codDoc` AS `codDoc`,`usuarios`.`nomUsu` AS `nomUsu`,aes_decrypt(`usuarios`.`password`,1999) AS `DECRYPT` from `usuarios` where (`usuarios`.`codDoc` is not null) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `docentes_pass`  AS  select `usuarios`.`codDoc` AS `codDoc`,`usuarios`.`nomUsu` AS `nomUsu`,aes_decrypt(`usuarios`.`password`,1999) AS `DECRYPT` from `usuarios` where (`usuarios`.`codDoc` is not null) ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +246,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`andres`@`localhost` SQL SECURITY DEFINER VIE
 --
 DROP TABLE IF EXISTS `estudiantes_pass`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`andres`@`localhost` SQL SECURITY DEFINER VIEW `estudiantes_pass`  AS  select `usuarios`.`codEst` AS `codEst`,`usuarios`.`nomUsu` AS `nomUsu`,aes_decrypt(`usuarios`.`password`,1999) AS `DECRYPT` from `usuarios` where (`usuarios`.`codEst` is not null) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `estudiantes_pass`  AS  select `usuarios`.`codEst` AS `codEst`,`usuarios`.`nomUsu` AS `nomUsu`,aes_decrypt(`usuarios`.`password`,1999) AS `DECRYPT` from `usuarios` where (`usuarios`.`codEst` is not null) ;
 
 --
 -- Índices para tablas volcadas
